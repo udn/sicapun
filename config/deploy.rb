@@ -1,5 +1,5 @@
 ##
-lock '3.3.5'
+lock '3.4.0'
 
 set :application, 'sicapun'
 set :repo_url, "git@github.com:udn/sicapun.git"
