@@ -5,8 +5,8 @@ set :application, 'sicapun'
 set :repo_url, "git@github.com:udn/sicapun.git"
 set :rvm_type, :user
 set :rvm_ruby_version, '2.2.0@qontak-api'
-ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
-
+# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
+set :branch, :master
 set :use_sudo, false
 set :bundle_binstubs, nil
 # set :linked_files, fetch(:linked_files, []).push('config/database.yml')
