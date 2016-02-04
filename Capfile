@@ -6,7 +6,6 @@ require 'capistrano/bundler'
 # require 'capistrano/rails/migrations'
 require 'capistrano3/unicorn'
 
-load 'deploy'
 load 'config/deploy'
 load 'config/staging'
 
