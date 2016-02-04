@@ -3,7 +3,8 @@ lock '3.4.0'
 
 set :application, 'sicapun'
 set :repo_url, "git@github.com:udn/sicapun.git"
-
+set :rvm_type, :user
+set :rvm_ruby_version, '2.2.0@qontak-api'
 ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 set :use_sudo, false
