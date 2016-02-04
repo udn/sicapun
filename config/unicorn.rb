@@ -1,47 +1,39 @@
-# define paths and filenames
-deploy_to = "/home/deployer/www"
-rails_root = "#{deploy_to}/current"
-pid_file = "#{deploy_to}/shared/pids/unicorn.pid"
-socket_file= "#{deploy_to}/shared/unicorn.sock"
-log_file = "#{rails_root}/log/unicorn.log"
-err_log = "#{rails_root}/log/unicorn_error.log"
-old_pid = pid_file + '.oldbin'
+root = "/home/deployer/apps/sicapun/current"
+working_directory root
 
+pid "#{root}/tmp/pids/unicorn.pid"
+
+stderr_path "#{root}/log/unicorn.log"
+stdout_path "#{root}/log/unicorn.log"
+
+worker_processes Integer(ENV['WEB_CONCURRENCY'])
 timeout 30
-worker_processes 2 # increase or decrease
-# listen socket_file, :backlog => 1024
-listen 8080
-
-pid pid_file
-stderr_path err_log
-stdout_path log_file
-
-# make forks faster
 preload_app true
 
-# make sure that Bundler finds the Gemfile
-before_exec do |server|
-  ENV['BUNDLE_GEMFILE'] = File.expand_path('../Gemfile', File.dirname(__FILE__))
-end
+# listen '/tmp/unicorn.spui.sock', backlog: 64
+listen 8080
 
 before_fork do |server, worker|
-  defined?(ActiveRecord::Base) and
-      ActiveRecord::Base.connection.disconnect!
-
-  # zero downtime deploy magic:
-  # if unicorn is already running, ask it to start a new process and quit.
-  if File.exists?(old_pid) && server.pid != old_pid
-    begin
-      Process.kill("QUIT", File.read(old_pid).to_i)
-    rescue Errno::ENOENT, Errno::ESRCH
-      # someone else did our job for us
-    end
+  Signal.trap 'TERM' do
+    puts 'Unicorn master intercepting TERM and sending myself QUIT instead'
+    Process.kill 'QUIT', Process.pid
   end
+
+  defined?(ActiveRecord::Base) and
+    ActiveRecord::Base.connection.disconnect!
 end
 
 after_fork do |server, worker|
+  Signal.trap 'TERM' do
+    puts 'Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT'
+  end
 
-  # re-establish activerecord connections.
   defined?(ActiveRecord::Base) and
-      ActiveRecord::Base.establish_connection
+    ActiveRecord::Base.establish_connection
+end
+
+# Force the bundler gemfile environment variable to
+# reference the capistrano "current" symlink
+before_exec do |_|
+  ENV['BUNDLE_GEMFILE'] = File.join(root, 'Gemfile')
 end
