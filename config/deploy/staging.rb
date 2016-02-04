@@ -16,6 +16,3 @@ set :ssh_options, {
   auth_methods: %w(publickey),
   user: 'deployer',
 }
-
-# set :rails_env, :production
-# set :conditionally_migrate, true
