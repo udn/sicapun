@@ -1,4 +1,3 @@
-# sincapun.rb
 require 'sinatra'
 
 class Sincapun < Sinatra::Base
@@ -6,7 +5,3 @@ class Sincapun < Sinatra::Base
     "Hello world"
   end
 end
-
-# config.ru
-require './sincapun'
-run Sincapun
