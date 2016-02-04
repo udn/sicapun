@@ -1,6 +1,6 @@
 require 'sinatra'
 
-class Sincapun < Sinatra::Base
+class Sicapun < Sinatra::Base
   get '/' do
     "Hello world"
   end

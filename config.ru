@@ -1,3 +1,3 @@
-require './sincapun'
+require './sicapun'
 
-run Sincapun
+run Sicapun
