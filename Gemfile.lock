@@ -57,6 +57,8 @@ GEM
     rack-protection (1.5.3)
       rack
     raindrops (0.15.0)
+    rvm-capistrano (1.4.1)
+      capistrano (>= 2.0.0)
     sinatra (1.4.7)
       rack (~> 1.5)
       rack-protection (~> 1.4)
@@ -81,6 +83,7 @@ PLATFORMS
 DEPENDENCIES
   capistrano (~> 2.15.4)
   grape
+  rvm-capistrano (= 1.4.1)
   sinatra
   unicorn
 
