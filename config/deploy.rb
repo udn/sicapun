@@ -24,7 +24,7 @@ after 'deploy:publishing', 'deploy:restart'
 
 set :deploy_to, "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
 set :unicorn_conf, "#{deploy_to}/current/config/unicorn/unicorn.rb"
-set :unicorn_pid, "#{deploy_to}/shared/tmp/pids/unicorn.pid"
+set :unicorn_pid, "#{deploy_to}/current/tmp/pids/unicorn.pid""
 
 namespace :deploy do
   task :restart do
