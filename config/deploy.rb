@@ -18,7 +18,7 @@ namespace :deploy do
   end
   desc 'Re-establish database.yml'
   task :set_database_symlink do
-    run "ln -s /home/deployer/database.yml #{current_release}/config/database.yml"
+    run "ln -s /home/deployer/database.yml #{current_path}/config/database.yml"
   end
 end
 
