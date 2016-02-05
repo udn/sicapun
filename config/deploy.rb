@@ -12,19 +12,11 @@ set :use_sudo, false
 set :bundle_binstubs, nil
 # set :linked_files, fetch(:linked_files, []).push('config/database.yml')
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
-
+set :preload_app, true
 
 after 'deploy:publishing', 'deploy:restart'
-
-# namespace :deploy do
-#   task :restart do
-#     invoke 'unicorn:reload'
-#   end
-# end
-
-
 namespace :deploy do
   task :restart do
-    invoke 'unicorn:reload'
+    invoke 'unicorn:restart'
   end
 end
