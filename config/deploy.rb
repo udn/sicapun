@@ -14,8 +14,6 @@ set :bundle_binstubs, nil
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 set :preload_app, true
 
-after 'deploy:publishing', 'deploy:restart'
-after "deploy", 'deploy:install_bundle'
 namespace :deploy do
   task :restart do
     invoke 'unicorn:legacy_restart'
@@ -26,3 +24,5 @@ namespace :deploy do
   end
 end
 
+after 'deploy:publishing', 'deploy:restart'
+after "deploy", 'deploy:install_bundle'
