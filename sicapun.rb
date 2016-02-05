@@ -2,6 +2,6 @@ require 'sinatra'
 
 class Sicapun < Sinatra::Base
   get '/' do
-    "Hello world! :))"
+    "Hello world! :D"
   end
 end
