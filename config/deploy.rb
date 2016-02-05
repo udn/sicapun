@@ -5,6 +5,7 @@ set :application, 'sicapun'
 set :repo_url, "git@github.com:udn/sicapun.git"
 set :rvm_type, :user
 set :rvm_ruby_version, '2.2.0@qontak-api'
+set :unicorn_example, "config/unicorn/unicorn.rb"
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 set :branch, :master
 set :use_sudo, false
