@@ -1,6 +1,7 @@
 ##
 lock '3.4.0'
 
+set :user, 'deployer'
 set :application, 'sicapun'
 set :repo_url, 'git@github.com:udn/sicapun.git'
 set :rvm_type, :user
