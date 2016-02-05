@@ -13,7 +13,7 @@ set :bundle_binstubs, nil
 # set :linked_files, fetch(:linked_files, []).push('config/database.yml')
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 set :preload_app, true
-SSHKit.config.command_map[:bundle] = "/home/deployer/.rvm/gems/ruby-2.2.0@global/bin/bundle"
+# SSHKit.config.command_map[:bundle] = "/home/deployer/.rvm/gems/ruby-2.2.0@global/bin/bundle"
 namespace :deploy do
   task :restart do
     invoke 'unicorn:legacy_restart'
