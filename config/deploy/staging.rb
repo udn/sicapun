@@ -2,6 +2,7 @@ set :port, 22
 set :user, 'deployer'
 set :deploy_via, :remote_cache
 set :use_sudo, false
+set :rails_env, :staging
 
 server '128.199.128.160',
   roles: [:web, :app, :db],
