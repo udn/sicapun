@@ -17,8 +17,6 @@ namespace :deploy do
   task :restart do
     invoke 'unicorn:legacy_restart'
   end
-  desc 'Re-establish database.yml'
 end
 
 after 'deploy:publishing', 'deploy:restart'
-before 'deploy:publishing', 'deploy:set_database_symlink'
