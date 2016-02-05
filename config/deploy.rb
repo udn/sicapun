@@ -15,8 +15,14 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 set :preload_app, true
 
 after 'deploy:publishing', 'deploy:restart'
+before 'deploy:restart', 'deploy:install_bundle'
 namespace :deploy do
   task :restart do
     invoke 'unicorn:legacy_restart'
   end
+  desc 'run bundle install'
+  task :install_bundle do
+    run "cd #{current_path} && bundle install"
+  end
 end
+
