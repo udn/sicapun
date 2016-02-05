@@ -2,7 +2,7 @@
 lock '3.4.0'
 
 set :application, 'sicapun'
-set :repo_url, "git@github.com:udn/sicapun.git"
+set :repo_url, 'git@github.com:udn/sicapun.git'
 set :rvm_type, :user
 set :rvm_ruby_version, '2.2.0@qontak-api'
 set :unicorn_example, "config/unicorn/unicorn.rb"
@@ -15,6 +15,11 @@ namespace :deploy do
   task :restart do
     invoke 'unicorn:legacy_restart'
   end
+  desc 'Re-establish database.yml'
+  task :set_database_symlink do
+    run "ln -s /home/#{user}/database.yml #{current_release}/config/database.yml"
+  end
 end
 
 after 'deploy:publishing', 'deploy:restart'
+before 'deploy:publishing', 'deploy:set_database_symlink'

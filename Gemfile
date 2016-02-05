@@ -8,10 +8,11 @@ gem 'bson_ext'
 gem 'rake'
 
 
+gem "activerecord"
+gem "sinatra-activerecord"
 gem 'pg'
 
 group :development do
-  gem 'shotgun'
   gem 'capistrano', '3.4.0'
 	gem 'capistrano-rvm', '0.1.2'
 	gem 'capistrano3-unicorn'
