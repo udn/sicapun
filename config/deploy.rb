@@ -11,15 +11,13 @@ set :branch, :master
 set :use_sudo, false
 set :bundle_binstubs, nil
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
+set :linked_files, %w{config/database.yml}
 set :preload_app, true
 namespace :deploy do
   task :restart do
     invoke 'unicorn:legacy_restart'
   end
   desc 'Re-establish database.yml'
-  task :set_database_symlink do
-    run "ln -s /home/deployer/database.yml #{current_path}/config/database.yml"
-  end
 end
 
 after 'deploy:publishing', 'deploy:restart'
